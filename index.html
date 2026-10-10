@@ -68,13 +68,16 @@ nav{display:flex;align-items:center;justify-content:space-between;height:4.5rem}
 .track span:nth-child(even){color:var(--ember)}
 @keyframes slide{to{transform:translateX(-50%)}}
 
-.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
+.about{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.about-photo{position:relative;border:3px solid var(--ink);background:var(--paper);box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.about-photo img{display:block;width:100%;height:auto;aspect-ratio:1172/1536;object-fit:cover;filter:grayscale(100%)}
+.about-copy{min-width:0}
 .about p{margin-bottom:1.25rem;max-width:56ch}
 .facts{list-style:none;padding:0;border:3px solid var(--ink);background:var(--paper)}
 .facts li{padding:1.25rem 1.5rem;border-bottom:3px solid var(--ink)}.facts li:last-child{border:0}
 .facts small{display:block;font-weight:700;color:var(--ember);font-size:.9rem}
 .facts strong{font:700 1.3rem var(--d);letter-spacing:-.02em}
-@media(max-width:820px){.about{grid-template-columns:1fr}}
+@media(max-width:820px){.about{grid-template-columns:1fr}.about-photo{max-width:460px}}
 
 .roles-list{display:grid;gap:1.5rem}
 .role{background:var(--paper);border:3px solid var(--ink);padding:clamp(1.5rem,4vw,2.5rem);display:grid;grid-template-columns:4rem 1fr;gap:1.5rem}
@@ -196,8 +199,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75re
 
 <section id="about" aria-labelledby="about-h">
   <div class="wrap about">
-    <div><span class="kicker">About</span><h2 id="about-h">Security work, from both sides of the desk.</h2></div>
-    <div>
+    <div class="about-photo">
+      <img src="assets/suyash-portrait.jpg" alt="Suyash Pandey in a black-and-white portrait with a vintage Macintosh computer" loading="lazy" width="1172" height="1536">
+    </div>
+    <div class="about-copy">
+      <span class="kicker">About</span><h2 id="about-h">Security work, from both sides of the desk.</h2>
       <p>I'm the Founder and CEO of VulnTech, a bootstrapped cybersecurity education company where I also teach. I'm also a Cybersecurity Consultant at Socialys Evidentia Pvt. Ltd., within the CEO's Office.</p>
       <p>My foundation covers information gathering, vulnerability analysis and assessment, exploitation and Linux administration. I'm completing a B.Tech in Computer Science and Engineering at MUIT, Lucknow.</p>
       <ul class="facts">
