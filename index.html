@@ -115,6 +115,9 @@ summary:hover{background:var(--soft)}
 .proj{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .card{background:var(--paper);border:3px solid var(--ink);display:flex;flex-direction:column}
 .card:hover{box-shadow:6px 6px 0 var(--ink)}
+.card.featured{border:4px solid var(--ember);box-shadow:7px 7px 0 var(--ink);position:relative}
+.card.featured .art{border-bottom-color:var(--ember)}
+.card.featured .feature-label{display:inline-block;background:var(--ember);color:#fff;padding:.15rem .55rem;margin-bottom:.35rem;font-size:.75rem;font-weight:700;letter-spacing:.06em}
 .art{height:9rem;border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font:800 4.5rem var(--d);letter-spacing:-.06em}
 .card:nth-child(1) .art{background:var(--ember);color:#fff}
 .card:nth-child(2) .art{background:var(--soft);color:var(--ink)}
@@ -294,7 +297,8 @@ const PROJECTS = [
   { art: "V.", type: "FOUNDER AND CEO", title: "VulnTech", desc: "Bootstrapped cybersecurity education company.", more: "A cybersecurity education company I founded and lead as CEO, built around practical, intuition-first learning.", link: LINKS.company[0] },
   { art: "▶", type: "EDUCATION", title: "VulnTech courses and videos", desc: "Courses, tutorials and training content.", more: "Cybersecurity courses, tutorials and training content produced under the VulnTech brand.", link: LINKS.company[2] },
   { art: "PT", type: "WEB APPLICATION SECURITY", title: "Authorized black-box penetration test", desc: "Live platform, tested with authorization.", more: "A black-box penetration test of a live platform, carried out with authorization. Client details and findings are confidential and not published here." },
-  { art: "Vj", type: "VULNTECH PLATFORM", title: "Vajra", desc: "A VulnTech security platform.", more: "Vajra is built by VulnTech and is part of the security platforms I work with.", link: LINKS.company[0] }
+  { art: "Vj", type: "FEATURED PROJECT · VULNTECH PLATFORM", title: "Vajra", desc: "A VulnTech security platform.", more: "Vajra is built by VulnTech and is part of the security platforms I work with.", link: LINKS.company[0], featured: true },
+  { art: "A", type: "FEATURED PROJECT · WEB SERVER", title: "Arka", desc: "World's Fastest Web Server", more: "Arka — World's Fastest Web Server.", featured: true }
 ];
 /* ======================================================== */
 const $ = s => document.querySelector(s);
@@ -335,7 +339,8 @@ PROJECTS.forEach((p, i) => {
   btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", id);
   const more = mk("div", { className: "more", id }, [mk("p", { textContent: p.more })]);
   if (p.link) more.append(ext(mk("a", { textContent: "Visit " + p.link.note + " \u2197" }), p.link.url));
-  const card = mk("article", { className: "card" }, [mk("div", { className: "art", textContent: p.art, ariaHidden: "true" }), btn, more]);
+  const card = mk("article", { className: p.featured ? "card featured" : "card" }, [mk("div", { className: "art", textContent: p.art, ariaHidden: "true" }), btn, more]);
+  if (p.featured) btn.querySelector("span").prepend(mk("span", { className: "feature-label", textContent: "FEATURED" }));
   card.dataset.open = "false";
   btn.addEventListener("click", () => { const o = card.dataset.open !== "true"; card.dataset.open = o; btn.setAttribute("aria-expanded", o); });
   $("#proj").append(card);
